@@ -12,11 +12,11 @@ determini e visualizzi in Output:
 L’inserimento termina con la parola “terminato”.
 Il programma deve permettere il reinserimento del prezzo se è pari a zero o inferiore. */
 
-#include <stdio.h> //libreria per I/O
-#include <string.h> //libreria per la gestione delle stringhe
+#include <stdio.h> //I/O library
+#include <string.h> //string management library
 void main()
 {
-	/* dichiarazione e inizializzazione variabili */
+	/* variables declaration and initialization */
 	char nome[100], nomeMin[100], nomeMax[100];
 	char fine[10];
 	float prezzo, prezzoMin, prezzoMax;
@@ -24,27 +24,28 @@ void main()
 	float media, media2;
 	int cont=0, cont2=0;
 	
-	/* definizione costanti */
+	/* constants definition */
 	#define TERMINE1 2.5
 	#define TERMINE2 3.5
 	
-	/* ripetizione inserimento valori */
+	/* loop */
 	do
 	{
-		/* richiesta inserimento dati */
+		/* input datas */
 		printf("Inserisci nome azione: ");
 		scanf("%s", &nome);
 		printf("Inserisci prezzo azione: ");
 		scanf("%f", &prezzo);
 		
-		/* elaborazione dati */
+		/* finding maximum and minimum (we first assing at the fist value both maximun and minimum) */
 		if(cont==0)
 		{
 			prezzoMin=prezzo;
 			prezzoMax=prezzo;
-			strcpy(nomeMin, nome); //strcpy serve per assegnare un valore di una stringa ad un'altra
+			strcpy(nomeMin, nome); //we use strcpy to copy a string from a variable to another
 			strcpy(nomeMax, nome);
 		}
+		/* conditions for the change of maximum and minimum */
 		else
 		{
 			if(prezzo<prezzoMin)
@@ -60,25 +61,27 @@ void main()
 			}
 		}
 		
+		/* increasing of the variables */
 		somma+=prezzo;
 		cont++;
 		
+		/* particular increasing for a precise interval */
 		if(prezzo>=TERMINE1 && prezzo<=TERMINE2)
 		{
 			somma2+=prezzo;
 			cont2++;
 		}
 		
-		/* richiesta ripetizione operazioni */
+		/* demand of repeat the whole process before */
 		printf("Desideri inserire una nuova azione?\nDigita SI per confermare, qualsiasi altro tasto per annullare\n");
 		scanf("%s", &fine);
 	}while(strcmp(fine, "SI")==0 || strcmp(fine, "si")==0); //strcmp serve per confrontare il contenuto tra stringhe. Se dà risultato 0 significa che sono uguali.
 																	
-	/* calcolo medie */
+	/* calcultaion of avarage prices of actions */
 	media=somma/cont;
 	media2=somma2/cont2;
 	
-	/* output risultati */
+	/* output of the results */
 	printf("\n\nLa somma dei prezzi delle azioni e' %.2f€", somma);
 	printf("\nLa media dei prezzi delle azioni e' %.2f€", media);
 	printf("\nL'azione con il prezzo minimo e' %s con %.2f€", nomeMin, prezzoMin);

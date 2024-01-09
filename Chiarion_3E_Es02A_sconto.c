@@ -11,31 +11,31 @@
 #include <stdio.h>
 void main()
 {
-    /* dichiarazione e inizializzazione di variabili */
+    /* variables declaration and initialization */
     int prezzo;
     int ripetere;
     double sconto;
     double prezzo_scontato;
 
-/* dichiarazione e inizializzazione di costanti */
-#define SCONTO1 10
-#define SCONTO2 20
-#define SCONTO3 30
+	/* constants declaration and initialization */
+	#define SCONTO1 10
+	#define SCONTO2 20
+	#define SCONTO3 30
 
     do
     {
-        /* inserimento dati input */
+        /* data input */
         do
         {
             printf("Inserisci un prezzo da pagare: ");
             scanf("%d", &prezzo);
         } while (prezzo <= 0);
 
-        /* calcolo dati */
+        /* different instructions for different prices */
         if (prezzo <= 500)
         {
-            printf("\n\nLo sconto applicato e' del %d%%", SCONTO1);
-            prezzo_scontato = (double)(prezzo - prezzo * SCONTO1 / 100);
+            printf("\n\nLo sconto applicato e' del %d%%", SCONTO1); //output of the discount
+            prezzo_scontato = (double)(prezzo - prezzo * SCONTO1 / 100); //calculating the discounted price
         }
 
         else if (prezzo > 500 && prezzo <= 1000)
@@ -50,9 +50,10 @@ void main()
             prezzo_scontato = (double)(prezzo - prezzo * SCONTO3 / 100);
         }
 
-        printf("\nIl prezzo scontato e' %.2f", prezzo_scontato);
+        /* output of the result */
+		printf("\nIl prezzo scontato e' %.2f", prezzo_scontato);
 
-        /* richiesta ripetizione */
+        /* repetition request*/
         do
         {
             printf("\n\nDesidera ripetere?\nInserire 1 per ripetere\n0 per annullare\n");

@@ -9,16 +9,16 @@ riassuma tutte le funzionalità degli esercizi
 
 void main()
 {
-	/* dichiarazione variabili */
+	/* variable declaration */
 	int scelta;
 	
-	/* menu di scelta */
+	/* possible choices */
 	printf("Benvenuto! Scegli tra le seguenti funzionalita': ");
 	printf("\nDigita 1 - Sconto di prezzi");
 	printf("\nDigita 2 - Conteggio, somma e media di numeri positivi e negativi");
 	printf("\nDigita 3 - Somma di numeri primi alterni\n");
 	
-	/* input con controllo */
+	/* control of input */
 	do
 	{
 		scanf("%d", &scelta);
@@ -37,29 +37,30 @@ void main()
 				numPrimi();
 }
 
+/* function to calculate a discount */
 void sconto()
 {
-	/* dichiarazione e inizializzazione di variabili */
+	/* variables declaration and initialization */
     int prezzo;
     int ripetere;
     double sconto;
     double prezzo_scontato;
 
-	/* dichiarazione e inizializzazione di costanti */
+	/* constants declaration and initialization */
 	#define SCONTO1 10
 	#define SCONTO2 20
 	#define SCONTO3 30
 
     do
     {
-        /* inserimento dati input */
+        /* data input */
         do
         {
             printf("Inserisci un prezzo da pagare: ");
             scanf("%d", &prezzo);
         } while (prezzo <= 0);
 
-        /* calcolo dati */
+        /* different discounts for different amount of money */
         if (prezzo <= 500)
         {
             printf("\n\nLo sconto applicato e' del %d%%", SCONTO1);
@@ -78,9 +79,10 @@ void sconto()
             prezzo_scontato = (double)(prezzo - prezzo * SCONTO3 / 100);
         }
 
+		/* output of the result */
         printf("\nIl prezzo scontato e' %.2f", prezzo_scontato);
 
-        /* richiesta ripetizione */
+        /* possible repetition with input control */
         do
         {
             printf("\n\nDesidera ripetere?\nInserire 1 per ripetere\n0 per annullare\n");
@@ -90,32 +92,34 @@ void sconto()
     } while (ripetere == 1);
 }
 
+/* function to calculate the addition of positive and negative numbers */
 void posNeg()
 {
-	/* dichiarazione e inizializzazione variabili */
+	/* variables declaration and initialization */
     int dim;
     int contPos=0, contNeg=0;
     int sommaPos=0, sommaNeg=0;
     int i;
     double mediaPos=0, mediaNeg=0;
 
-    /* richiesta numero valori */
+    /* input data request */
     do
     {
         printf("Quanti numeri vuoi inserire? ");
         scanf("%d", &dim);
     } while (dim<=0);
 
-    /* dichiarazione e inizializzazione vettori */
+    /* declaration and initialization array */
     int vet[dim];
 
-    /* richiesta inserimento valori */
+    /* input data */
     printf("\n\n");
     for(i=0;i<dim;i++)
     {
         printf("Inserisci un valore: ");
         scanf("%d", &vet[i]);
 
+		/* control if the number is positive or negative, so decide where it will be added up */
         if(vet[i]<0)
         {
             contNeg++;
@@ -129,11 +133,11 @@ void posNeg()
         }
     }
 
-    /* calcolo media */ 
+    /* calculate of avarages */ 
     mediaPos=(double) sommaPos/contPos;
     mediaNeg=(double) sommaNeg/contNeg;
 
-    /* output di sistema */
+    /* output of the results */
     printf("\n\nNUMERI POSITIVI: ");
     printf("Numero = %d", contPos);
     printf("\nSomma = %d", sommaPos);
@@ -144,36 +148,39 @@ void posNeg()
     printf("\nMedia = %.2f", mediaNeg);
 }
 
+/* function to find prime numbers */
 void numPrimi()
 {
-	/* dichiarazione e inizializzazione variabili */
+	 /* variables declaration and initialization */
     int num;
-    int i=0,j,k;
+    int i=0,j,k=2;
     int contDiv=0;
     int somma=0;
 
 
-    /* richiesta inserimento dati input */
+    /* data input */
     do
     {
         printf("Inserisci un numero positivo: ");
         scanf("%d", &num);
     } while (num<0);
 
-    /* ricerca numeri primi */
-    k=num;
+    /* prime numbers research */
     while(i<num*2)
     {
+    	/* finding the dividers of the number */
     	for(j=k;j>0;j--)
     	{
     		if(k%j==0)
     			contDiv++;
 		}
 		
+		/* if the dividers of the number are 2, this is a prime number */
 		if(contDiv==2)
 		{
 			i++;
 			
+			/* alternating the sum of prime numbers */
 			if(i%2!=0)
 			{
 				somma=somma+k;
@@ -181,11 +188,11 @@ void numPrimi()
 			}		
 		}
 		
-		/* incremento e azzeramento variabili opportune */
+		/* increase and reset of the proper variables */
 		contDiv=0;
 		k++;
 	}
 	
-	/* output risultati */
+	/* output of the results */
 	printf("\n\nLa somma finale dei numeri alterni primi maggiori di %d e' %d ", num, somma);
 }

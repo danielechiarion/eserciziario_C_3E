@@ -10,30 +10,31 @@
 #include <stdio.h>
 void main()
 {
-    /* dichiarazione e inizializzazione variabili */
+    /* variables declaration and initialization */
     int dim;
     int contPos=0, contNeg=0;
     int sommaPos=0, sommaNeg=0;
     int i;
     double mediaPos=0, mediaNeg=0;
 
-    /* richiesta numero valori */
+    /* data input */
     do
     {
         printf("Quanti numeri vuoi inserire? ");
         scanf("%d", &dim);
     } while (dim<=0);
 
-    /* dichiarazione e inizializzazione vettori */
+    /* array declaration and initialization */
     int vet[dim];
 
-    /* richiesta inserimento valori */
+    /* input data request */
     printf("\n\n");
     for(i=0;i<dim;i++)
     {
         printf("Inserisci un valore: ");
         scanf("%d", &vet[i]);
 
+		/* control if the number is positive of negative, so decide where the value will be added up */
         if(vet[i]<0)
         {
             contNeg++;
@@ -47,11 +48,11 @@ void main()
         }
     }
 
-    /* calcolo media */ 
+    /* calculate of the averages */ 
     mediaPos=(double) sommaPos/contPos;
     mediaNeg=(double) sommaNeg/contNeg;
 
-    /* output di sistema */
+    /* output df the results */
     printf("\n\nNUMERI POSITIVI: ");
     printf("Numero = %d", contPos);
     printf("\nSomma = %d", sommaPos);

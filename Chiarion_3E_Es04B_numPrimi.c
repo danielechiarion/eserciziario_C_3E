@@ -9,7 +9,7 @@ void main()
 {
     /* variables declaration and initialization */
     int num;
-    int i=0,j,k;
+    int i=0,j,k=2;
     int contDiv=0;
     int somma=0;
 
@@ -22,22 +22,21 @@ void main()
     } while (num<0);
 
     /* prime numbers research */
-    k=num;
     while(i<num*2)
     {
-    	/* count of the dividers */
-    	for(j=k+1;j>0;j--)
+    	/* finding the dividers of the number */
+    	for(j=k;j>0;j--)
     	{
     		if(k%j==0)
     			contDiv++;
 		}
 		
-		/* if the dividers are two, it's a prime number */
+		/* if the dividers of the number are 2, this is a prime number */
 		if(contDiv==2)
 		{
 			i++;
 			
-			/* adding alternate values to the somma variable */
+			/* alternating the sum of prime numbers */
 			if(i%2!=0)
 			{
 				somma=somma+k;
@@ -45,7 +44,7 @@ void main()
 			}		
 		}
 		
-		/* increasing and reset for the proper variables */
+		/* increase and reset of the proper variables */
 		contDiv=0;
 		k++;
 	}
