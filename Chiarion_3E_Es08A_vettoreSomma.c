@@ -5,6 +5,8 @@
 scrivere in output un terzo vettore dato dalla somma delle componenti fatta a una a una (Vettore
 somma). */
 
+#include <stdio.h>
+
 void main()
 {
     /* dichiarazione variabili */
