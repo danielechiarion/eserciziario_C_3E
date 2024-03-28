@@ -12,7 +12,7 @@
 #include <string.h>
 
 /* funzione per menu generico */
-int menu(char stringa[][50], int size)
+int menu(char stringa[][200], int size)
 {
     int scelta;
     int i;
@@ -56,19 +56,34 @@ void cancellaPos(char stringa[], int pos)
     scorro tutti i caratteri*/
     for (int i = pos + 1; i < strlen(stringa); i++)
         stringa[i - 1] = stringa[i]; // scorro i caratteri nella posizione precedente
+
+    /* metto nell'ultima posizione,
+    prima occupata da un carattere, il terminatore */
+    stringa[strlen(stringa)-1]='\0';
 }
 
 /* funzione per cancellare
 i caratteri uguali nella stringa */
 void cancellaCarattere(char stringa[], char carattere)
 {
+    int indexStringa=0; //dichiaro un indice da incrementare manualmente
+
     /* scorro tutti i caratteri per cercare
     quello richiesto */
     for (int i = 0; i < strlen(stringa); i++)
-    {
-        if (stringa[i] == carattere) // se lo strovo, sposto tutti i caratteri verso sinistra
-            cancellaPos(stringa, i);
+    while(indexStringa<strlen(stringa)){
+       if (stringa[indexStringa] == carattere) // se lo strovo, sposto tutti i caratteri verso sinistra
+            cancellaPos(stringa, indexStringa); //rimango quindi nello stesso indice per verificare un nuovo carattere
+       else
+            indexStringa++; //altrimenti mi sposto su un nuovo carattere
     }
+}
+
+void concatenaCarattere(char stringa[], char carattere)
+{
+    int lunghezza=strlen(stringa); //trovo la lunghezza della stringa iniziale
+    stringa[lunghezza]=carattere; //metto il carattere in coda alla stringa
+    stringa[lunghezza+1]='\0'; //aggiungo il terminatore di stringa
 }
 
 void main()
@@ -77,6 +92,7 @@ void main()
     char stringa[100];
     // menu di scelta utente
     char inputChar;
+    char continua;
     int posizione;
     int scelta;
     char opzioni[][200] = {{"OPZIONI PER L'UTENTE"},{"[1] Eliminare un carattere scelto dall'utente"},{"[2] Eliminare un carattere scelto dall'utente in base alla posizione"},{"[3] Aggiungere un carattere scelto a fine stringa"},{"[4] Fine"}};
@@ -85,19 +101,21 @@ void main()
     printf("Inserisci la stringa: ");
     scanf("%s", stringa);
 
-    scelta = menu(opzioni, sizeof(opzioni) / sizeof(opzioni[0]));
-    ClrScr();
 
     /* ripetizione operazioni
     fino a quando non si sceglie di terminare */
     do
     {
+        scelta = menu(opzioni, sizeof(opzioni) / sizeof(opzioni[0]));
+        ClrScr();
+        printf("La stringa di riferimento e' %s\n\n", stringa); //dico qual è la stringa di riferimento
         /* switch case con le varie opzioni */
         switch (scelta)
         {
         case 1:
             /* input carattere */
             printf("Inserisci carattere da eliminare: ");
+            scanf("%c", &inputChar);
             scanf("%c", &inputChar);
             /* modifica stringa */
             cancellaCarattere(stringa, inputChar);
@@ -107,7 +125,7 @@ void main()
         case 2:
             do
             { /* input valori */
-                printf("Inserisci posizione del carattere da eliminare ");
+                printf("Inserisci posizione del carattere da eliminare: ");
                 scanf("%d", &posizione);
 
                 /* possibile messaggio di errore */
@@ -123,9 +141,10 @@ void main()
             /* input carattere */
             printf("Inserisci carattere da aggiungere a fine stringa: ");
             scanf("%c", &inputChar);
+            scanf("%c", &inputChar);
             /* modifica stringa
             e concatenazione carattere*/
-            strcat(stringa, inputChar);
+            concatenaCarattere(stringa, inputChar);
             /* output risultati */
             printf("\n\nLa stringa modificata e' %s", stringa);
             break;
@@ -133,5 +152,10 @@ void main()
             printf("arresto del sistema");
             sleep(3);
         }
-    } while (scelta!=strlen(opzioni)-1);
+
+        /* richiesta continuazione programma */
+        printf("\n\nPremi INVIO per continuare ");
+        scanf("%c", &continua);
+        scanf("%c", &continua);
+    } while (scelta!=sizeof(opzioni)/sizeof(opzioni[0])-1);
 }
