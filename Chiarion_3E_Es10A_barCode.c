@@ -12,7 +12,6 @@ Codificare in linguaggio C un programma che, a paqrtire da un vettore di 12 elem
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <stdbool.h>
 #include <string.h>
 
 /* funzione per pulire lo schermo */
@@ -25,64 +24,29 @@ void ClrScr()
 #endif
 }
 
-/* funzione che calcola la potenza */
-int potenza(int base, int esponente){
-    int risultato=1; //dichiarazione variabile
-
-    /* moltiplico quante volte richiesto */
-    for(int i=0;i<esponente; i++)
-        risultato*=base;
-
-    return risultato; //ritorno valore
-}
-
-/* funzione che verifica
-se un numero appartiene a quell'ordine di grandezza */
-bool checkNumLength(int num){
-    if(num>=potenza(10, num-1) && num<potenza(10, num))
-        return true; //se il numero appartiene l'intervallo, restituisce true
-    else 
-        return false; //altrimenti restituisce false
-}
-
-/* funzione per convertire una stringa 
+/* funzione per convertire una stringa
 in un intero */
-int convertStringtoInt(char vet[], int size){
+void convertStringtoInt(char vet[50], int vet2[]){
     int risultato=0; //dichiarazione variabile
-    
-    for(int i=0;i<size;i++)
-        risultato=vet[i]*potenza(10, size-1-i); //aggiungo ogni volta il valore rispettando la posizione
 
-    return risultato; //ritorno il risultato
+    for(int i=0;i<strlen(vet);i++)
+        vet2[i]=(int)vet[i]-48; //aggiungo ogni volta il valore rispettando la posizione
 }
 
-/* funzione per l'input 
+/* funzione per l'input
 del valore */
-int inputCodice(int nMax){
-    char input[nMax-1]; //dichiarazione variabile come stringa
-
+void inputCodice(int nMax, char input[50]){
     do
     {
         printf("\nInserisci un codice di 12 cifre: ");
         scanf("%s", input);
         /* possibile messaggio di errore */
-        if(strlen(input)!=12){
+        if(strlen(input)!=nMax-1){
             printf("\n\nIl valore non e' di 12 cifre");
             sleep(4);
             ClrScr();
         }
     } while (strlen(input)!=12); //controllo se il numero è di 12 cifre
-
-    return convertStringtoInt(input, strlen(input));
-}
-
-/* funzione per suddividere un numero
-in vettore, con una cifra per ciascuna posizione */
-void dividiinVettore(int numero, int vet[], int size){
-    for(int i=0;i<size-1;i++){
-        vet[i]=numero/potenza(10, numero-i); //trovo la cifra e l'assegno alla posizione
-        numero-=potenza(10, numero-i); //sottraggo al numero ciò che è già stato calcolato
-    }
 }
 
 /* funzione per calcolare
@@ -102,7 +66,7 @@ void calcolaUltimoNumero(int vet[], int size){
     vet[size-1]=ultimoNumero%10; //assegno all'ultima posizione il risultato trovato
 }
 
-/* funzione che 
+/* funzione che
 stampa a schermo il vettore */
 void printVet(int vet[], int size){
     /* scorro tutti i valori
@@ -115,13 +79,13 @@ void printVet(int vet[], int size){
 void main(){
     /* dichiarazione variabili e vettori */
     #define maxLength 13
-    int numero;
+    char numero[maxLength];
     int vet[maxLength];
 
     /* input valori
     e suddivisione in un vettore */
-    numero=inputCodice(maxLength);
-    dividiinVettore(numero, vet, sizeof(vet)/sizeof(vet[0]));
+    inputCodice(maxLength, numero);
+    convertStringtoInt(numero, vet);
 
     calcolaUltimoNumero(vet, sizeof(vet)/sizeof(vet[0])); //calcolo ultimo numero codice a barre
 
