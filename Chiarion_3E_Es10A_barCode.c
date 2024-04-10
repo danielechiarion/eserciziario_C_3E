@@ -51,7 +51,7 @@ void inputCodice(int nMax, char input[50]){
 
 /* funzione per calcolare
 l'ultimo numero del codice a barre */
-void calcolaUltimoNumero(int vet[], int size){
+int calcolaUltimoNumero(int vet[], int size){
     int ultimoNumero=0; //dichiarazione variabile
 
     /* con cifre pari sono intesi i valori nelle posizioni 1,3...
@@ -64,6 +64,8 @@ void calcolaUltimoNumero(int vet[], int size){
     }
 
     vet[size-1]=ultimoNumero%10; //assegno all'ultima posizione il risultato trovato
+
+    return ultimoNumero%10;
 }
 
 /* funzione che
@@ -81,15 +83,17 @@ void main(){
     #define maxLength 13
     char numero[maxLength];
     int vet[maxLength];
+    int numeroControllo;
 
     /* input valori
     e suddivisione in un vettore */
     inputCodice(maxLength, numero);
     convertStringtoInt(numero, vet);
 
-    calcolaUltimoNumero(vet, sizeof(vet)/sizeof(vet[0])); //calcolo ultimo numero codice a barre
+    numeroControllo=calcolaUltimoNumero(vet, sizeof(vet)/sizeof(vet[0])); //calcolo ultimo numero codice a barre
 
     /* output risultati */
     printf("\n\nIl codice a barre completo e': ");
     printVet(vet, sizeof(vet)/sizeof(vet[0]));
+    printf("\nIl numero di controllo e' quindi: %d", numeroControllo);
 }
