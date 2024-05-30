@@ -95,7 +95,6 @@ void torriHanoi(int vet1[], int vet2[], int vet3[], int size){
                 spostaElemento(vet1, vet3, &index1, &index3);
             else
                 spostaElemento(vet3, vet1, &index3, &index1);
-            printf("\nCambio estremita");
         }
         else if(cont%3-1==0){ //se il contatore viene dopo l'ultimo spostamento devo iniziare gli spostamenti interni
             /* nel primo caso ho un valore nel primo vettore che è minore
@@ -104,13 +103,11 @@ void torriHanoi(int vet1[], int vet2[], int vet3[], int size){
             if(index2<0 ||(index1>=0 && vet1[index1]<vet2[index2])){
                 spostaElemento(vet1, vet2, &index1, &index2);
                 scelta=1;
-                printf("\nSposto valore da sinistra al centro");
             }
             /* altrimenti il movimento verrà fatto verso l'esterno */
             else{
                 spostaElemento(vet2, vet1, &index2, &index1); //in questo caso sposto sempre verso sinistra
                 scelta=2; //assegno la scelta
-                printf("\nSposto valore dal centro verso sinistra");
 
                 /* controllo solo se il nuovo ultimo numero del vettore 2
                 è maggiore dell'ultimo numero del vettore 3.
@@ -125,11 +122,9 @@ void torriHanoi(int vet1[], int vet2[], int vet3[], int size){
             switch(scelta){
                 case 1:
                     spostaElemento(vet3, vet2, &index3, &index2); //sposto l'elemento dall'ultimo vettore al centrale
-                    printf("\nSposto valore da destra a centro");
                     break;
                 case 2:
                     spostaElemento(vet2, vet3, &index2, &index3); //sposta elemento dal vettore centrale all'ultimo
-                    printf("\nSposto valore dal centro a sinistra");
                     break;
             }
         }
