@@ -84,6 +84,14 @@ void torriHanoi(int vet1[], int vet2[], int vet3[], int size){
     /* il ciclo va avanti fino a quando
     tutti gli elemnti si trovano nell'ultimo vettore */
     while(index3!=size-1){
+        /* controllo se almeno una delle due torri alle
+            estremità è occupata, altrimenti aumento di 1
+            il contatore per passare alla istruzione successiva */
+        /* faccio questo al di fuori della prima condizione altrimenti verrebbe
+        stampata la disposizione delle torri uguali alla precedente */
+        if(cont%3==0 && index1<0 && index3<0)
+            cont++;
+
         /* se il contatore è un multiplo di 3,
         devo spostare il contenuto tra i due vettori
         agli estremi */
@@ -112,7 +120,7 @@ void torriHanoi(int vet1[], int vet2[], int vet3[], int size){
                 /* controllo solo se il nuovo ultimo numero del vettore 2
                 è maggiore dell'ultimo numero del vettore 3.
                 Altrimenti cambio la scelta */
-                if(vet2[index2]>vet3[index3])
+                if(vet2[index2]>vet3[index3] && index3>=0)
                     scelta=1;
             }
         }
